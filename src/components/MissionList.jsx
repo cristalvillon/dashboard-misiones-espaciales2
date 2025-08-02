@@ -1,33 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import MissionCard from './MissionCard';
 
-function MissionList() {
-  const [missions, setMissions] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('https://rickandmortyapi.com/api/character')
-      .then(res => res.json())
-      .then(data => {
-        setMissions(data.results);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error(err);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) return <p>Cargando misiones...</p>;
-
+export default function MissionList({ missions }) {
   return (
-    <ul>
-      {missions.map(m => (
-        <li key={m.id}>
-          {m.name} - {m.species}
-        </li>
+    <div className="mission-list">
+      {missions.map(mission => (
+        <MissionCard key={mission.id} mission={mission} />
       ))}
-    </ul>
+    </div>
   );
 }
 
-export default MissionList;

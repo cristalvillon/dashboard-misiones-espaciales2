@@ -1,14 +1,13 @@
 import React from 'react';
 import Navbar from './components/Navbar';
-import MissionList from './components/MissionList';
+import Home from './pages/Home';
+import './app.css';
 
-function App() {
+export default function App() {
   return (
     <>
       <Navbar />
-      <MissionList />
+      <Home />
     </>
   );
 }
-
-export default App;
