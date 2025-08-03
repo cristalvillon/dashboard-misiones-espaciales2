@@ -1,13 +1,33 @@
-import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import RequireAuth from './components/RequireAuth';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import './app.css';
+import Perfil from './pages/Perfil';
+import Dashboard from './pages/Dashboard';
+import Login from './components/Login';
 
-export default function App() {
+
+
+function App() {
   return (
-    <>
-      <Navbar />
-      <Home />
-    </>
+    <AuthProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+
+          {/* Rutas protegidas */}
+          <Route element={<RequireAuth />}>
+            <Route path="/perfil" element={<Perfil />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
+
+export default App;
+ 

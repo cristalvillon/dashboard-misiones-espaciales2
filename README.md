@@ -14,7 +14,15 @@ If you are developing a production application, we recommend using TypeScript wi
 
 ## API Pública utilizada
 
-Para esta etapa utilizamos la API pública de Rick and Morty para obtener datos de personajes y simular misiones. La comunicación es directa entre frontend y API externa sin backend propio.
-=======
+📂 Rutas Públicas:
+- /login
+- /register
+- / (inicio)
+
+🔒 Rutas Protegidas:
+- /dashboard
+- /perfil
+- /editar-mision
+
 # dashboard-misiones-espaciales
 >>>>>>> 384c1067de77f1a325613585f430b138a5d28582
