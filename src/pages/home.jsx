@@ -11,7 +11,7 @@ export default function Home() {
         const res = await fetch('https://api.spacexdata.com/v4/launches/upcoming');
         const data = await res.json();
 
-        // Mapear datos relevantes
+        // mapear datos relevantes
         const missionsData = data.map(mission => ({
           id: mission.id,
           name: mission.name,

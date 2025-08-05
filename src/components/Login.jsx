@@ -22,7 +22,7 @@ export default function Login({ onLogin }) {
       }
 
       const data = await res.json();
-      onLogin(data.token); // Le pasamos el token al componente padre
+      onLogin(data.token); //  pasa el token al componente padre
       setError(null);
     } catch (err) {
       setError('Error en la conexión');

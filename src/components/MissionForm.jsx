@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { missionSchema } from "../schemas/missionSchema";
 
-export default function MissionForm() {
+export default function MissionForm() {}
   const {
     register,
     handleSubmit,
@@ -12,10 +12,10 @@ export default function MissionForm() {
     resolver: zodResolver(missionSchema),
   });
 
-  const [serverError, setServerError] = React.useState("");
-  const [successMessage, setSuccessMessage] = React.useState("");
+  const [serverError, setServerError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const onSubmit = async (data) => {
+  const onSubmit = useCallback(async (data) => {
     setServerError("");
     setSuccessMessage("");
 
@@ -38,7 +38,7 @@ export default function MissionForm() {
     } catch (error) {
       setServerError("❌ Error de red o del servidor, intenta más tarde.");
     }
-  };
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: 400, margin: "auto" }}>
@@ -73,6 +73,3 @@ export default function MissionForm() {
 
       {serverError && <p style={{ color: "red", marginTop: 10 }}>{serverError}</p>}
       {successMessage && <p style={{ color: "green", marginTop: 10 }}>{successMessage}</p>}
-    </form>
-  );
-}
