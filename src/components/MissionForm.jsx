@@ -2,8 +2,9 @@ import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { missionSchema } from "../schemas/missionSchema";
+import { useMissions } from "../context/MissionContext";
 
-export default function MissionForm() {}
+export default function MissionForm() {
   const {
     register,
     handleSubmit,
@@ -11,6 +12,8 @@ export default function MissionForm() {}
   } = useForm({
     resolver: zodResolver(missionSchema),
   });
+
+  const { addMission } = useMissions();
 
   const [serverError, setServerError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -22,9 +25,7 @@ export default function MissionForm() {}
     try {
       const response = await fetch("http://localhost:3001/api/misiones", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
@@ -34,11 +35,12 @@ export default function MissionForm() {}
         return;
       }
 
+      addMission(data);
       setSuccessMessage("✅ Misión guardada correctamente");
     } catch (error) {
       setServerError("❌ Error de red o del servidor, intenta más tarde.");
     }
-  }, []);
+  }, [addMission]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: 400, margin: "auto" }}>
@@ -73,3 +75,6 @@ export default function MissionForm() {}
 
       {serverError && <p style={{ color: "red", marginTop: 10 }}>{serverError}</p>}
       {successMessage && <p style={{ color: "green", marginTop: 10 }}>{successMessage}</p>}
+    </form>
+  );
+}

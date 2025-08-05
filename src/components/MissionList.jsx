@@ -1,15 +1,16 @@
-
 import React, { useMemo } from "react";
+import { useMissions } from "../context/MissionContext";
 
 const MissionItem = React.memo(({ mission }) => {
-  console.log("Renderizando misión:", mission.name);
   return <li>{mission.name}</li>;
 });
 
-export default function MissionList({ missions, searchTerm }) {
+export default function MissionList({ searchTerm }) {
+  const { missions } = useMissions();
+
   const filteredMissions = useMemo(() => {
     return missions.filter(m =>
-      mission.name.toLowerCase().includes(searchTerm.toLowerCase())
+      m.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [missions, searchTerm]);
 
@@ -21,4 +22,5 @@ export default function MissionList({ missions, searchTerm }) {
     </ul>
   );
 }
+
 
